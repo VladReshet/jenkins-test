@@ -10,7 +10,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                cleanWs()
+                cleanWs(
+                    patterns: [
+                        [pattern: 'build', type: 'INCLUDE'],
+                        [pattern: 'test.txt', type: 'INCLUDE'],
+                    ]
+                )
                 
                 writeFile(
                     file: 'build',
