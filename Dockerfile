@@ -9,6 +9,6 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get upgrade -y
 
-RUN apt-get install apt-utils zip unzip curl git nano software-properties-common pkg-config -y
+RUN apt-get install apt-utils zip unzip curl git nano software-properties-common pkg-config nodejs -y
 
 RUN npm install
