@@ -11,4 +11,7 @@ RUN apt-get update && apt-get upgrade -y
 
 RUN apt-get install apt-utils zip unzip curl git nano software-properties-common pkg-config nodejs -y
 
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
+RUN apt-get install -y nodejs
+
 RUN npm install
