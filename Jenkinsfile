@@ -13,15 +13,14 @@ pipeline {
                 cleanWs(
                     patterns: [
                         [pattern: 'build', type: 'INCLUDE'],
-                        [pattern: 'test.txt', type: 'INCLUDE'],
                     ]
                 )
                 
-                writeFile(
-                    file: 'build',
-                    text: "${env.GIT_BRANCH}/${env.GIT_COMMIT}\n",
-                    encoding: "UTF-8"
-                )
+//                 writeFile(
+//                     file: 'build',
+//                     text: "${env.GIT_BRANCH}/${env.GIT_COMMIT}\n",
+//                     encoding: "UTF-8"
+//                 )
                 
                 script{
                     docker.withRegistry( "https://registry.hub.docker.com/v2/", 'ca3c04e0-f23e-494c-b856-f5bdaf2581f7' ){
