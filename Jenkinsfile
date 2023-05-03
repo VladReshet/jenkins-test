@@ -41,7 +41,7 @@ pipeline {
             cleanWs(
                 deleteDirs: true,
                 disableDeferredWipeout: true
-            }
+            )
         }
     }
 }
