@@ -10,7 +10,7 @@ pipeline {
         stage('Build') {
             steps {
                 script{
-                    dockerImage = docker.build "alpine"
+                    dockerImage = docker.build("php:8.1-apache")
                 }         
             }
         }
