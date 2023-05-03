@@ -16,7 +16,7 @@ pipeline {
                 }
                 
                 echo "BUILD: ${env.GIT_BRANCH}/${env.GIT_COMMIT}"
-                sh "echo '${env.GIT_BRANCH}/${env.GIT_COMMIT}' > test.txt"
+                writeFile(file: 'build', text: "${env.GIT_BRANCH}/${env.GIT_COMMIT}")
             }
         }
         stage('push') {
