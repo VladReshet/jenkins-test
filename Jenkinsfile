@@ -35,13 +35,4 @@ pipeline {
             }
         }
     }
-   
-    post {
-        always {
-            cleanWs(
-                deleteDirs: true,
-                disableDeferredWipeout: true
-            )
-        }
-    }
 }
