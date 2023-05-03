@@ -1,5 +1,7 @@
 pipeline {
-    agent {label 'docker'}
+    agent {
+        label 'localrunner'
+    }
     environment {
         dockerImage = ''
     }
