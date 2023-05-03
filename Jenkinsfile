@@ -15,7 +15,7 @@ pipeline {
                     }
                 }
                 
-                echo "BUILD: {env.GIT_BRANCH}/${env.GIT_COMMIT}"
+                echo "BUILD: ${env.GIT_BRANCH}/${env.GIT_COMMIT}"
             }
         }
         stage('push') {
