@@ -16,7 +16,10 @@ pipeline {
                 }
                 
                 echo "BUILD: ${env.GIT_BRANCH}/${env.GIT_COMMIT}"
+                
                 writeFile(file: 'build', text: "${env.GIT_BRANCH}/${env.GIT_COMMIT}")
+                
+                echo "Saved to file ✅"
             }
         }
         stage('push') {
