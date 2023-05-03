@@ -2,6 +2,7 @@ pipeline {
     agent {
         label 'localrunner'
     }
+    
     environment {
         dockerImage = ''
     }
@@ -9,11 +10,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-//                 writeFile(
-//                     file: 'build',
-//                     text: "${env.GIT_BRANCH}/${env.GIT_COMMIT}\n",
-//                     encoding: "UTF-8"
-//                 )
+                cleanWs()
+                
+                writeFile(
+                    file: 'build',
+                    text: "${env.GIT_BRANCH}/${env.GIT_COMMIT}\n",
+                    encoding: "UTF-8"
+                )
                 
                 script{
                     docker.withRegistry( "https://registry.hub.docker.com/v2/", 'ca3c04e0-f23e-494c-b856-f5bdaf2581f7' ){
@@ -28,6 +31,14 @@ pipeline {
                     docker.withRegistry( "https://registry.hub.docker.com/v2/", 'ca3c04e0-f23e-494c-b856-f5bdaf2581f7' ){
                         dockerImage.push()
                      }
+                }
+            }
+        }
+        post {
+            always {
+                cleanWs(
+                    deleteDirs: true,
+                    disableDeferredWipeout: true,
                 }
             }
         }
