@@ -12,10 +12,7 @@ pipeline {
             steps {
                 writeFile(
                     file: 'build.txt',
-                    text: JsonOutput.toJson([
-                        gitBranch: env.GIT_BRANCH,
-                        gitCommit: env.GIT_COMMIT
-                    ]),
+                    text: "${env.GIT_BRANCH}/${env.GIT_COMMIT}\n",
                     encoding: 'UTF-8'
                 )
                 
