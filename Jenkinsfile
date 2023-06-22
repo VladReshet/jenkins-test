@@ -1,5 +1,8 @@
 import groovy.json.JsonOutput
 
+
+def currentTime = new Date().format("yyyy-MM-dd HH:mm")
+
 pipeline {
     agent {
         label 'localrunner'
@@ -11,13 +14,11 @@ pipeline {
 
     stages {
         stage('Build') {
-            def currentTime = new Date().format("yyyy-MM-dd HH:mm")
-
-            echo JsonOutput.toJson([
-                a: 'test'
-            ])
-            
             steps {  
+                echo JsonOutput.toJson([
+                    a: 'test'
+                ])
+                
                 writeFile(
                     file: 'build.txt',
                     text: "${env.GIT_BRANCH}/${env.GIT_COMMIT}/${currentTime}\n",
@@ -29,13 +30,16 @@ pipeline {
                         dockerImage = docker.build "vladvladvladvlad/jenkins-test:latest"
                     }
                 }
+            }
 
-
-                cleanWs(
-                    patterns: [
-                        [pattern: 'build.txt', type: 'INCLUDE'],
-                    ]
-                )
+            post {
+                always {
+                    cleanWs(
+                        patterns: [
+                            [pattern: 'build.txt', type: 'INCLUDE'],
+                        ]
+                    )
+                }
             }
         }
         stage('Push') {
