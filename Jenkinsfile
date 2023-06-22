@@ -12,10 +12,10 @@ pipeline {
             steps {
                 writeFile(
                     file: 'build.txt',
-                    text: new groovy.json.JsonBuilder([
+                    text: JsonOutput.toJson([
                         gitBranch: env.GIT_BRANCH,
                         gitCommit: env.GIT_COMMIT
-                    ]).toPrettyString(),
+                    ]),
                     encoding: 'UTF-8'
                 )
                 
