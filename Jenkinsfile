@@ -1,8 +1,5 @@
 import groovy.json.JsonOutput
 
-
-def currentTime = new Date().format("yyyy-MM-dd HH:mm")
-
 pipeline {
     agent {
         label 'localrunner'
@@ -21,7 +18,11 @@ pipeline {
                 
                 writeFile(
                     file: 'build.txt',
-                    text: "${env.GIT_BRANCH}/${env.GIT_COMMIT}/${currentTime}\n",
+                    text: JsonOutput.toJson([
+                        branch: env.GIT_BRANCH,
+                        commit: env.GIT_COMMIT,
+                        time: new Date().format("yyyy-MM-dd HH:mm"),
+                    ]),
                     encoding: 'UTF-8'
                 )
                 
