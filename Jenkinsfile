@@ -23,11 +23,11 @@ pipeline {
                 }
 
 
-                // cleanWs(
-                //     patterns: [
-                //         [pattern: 'build.txt', type: 'INCLUDE'],
-                //     ]
-                // )
+                cleanWs(
+                    patterns: [
+                        [pattern: 'build.txt', type: 'INCLUDE'],
+                    ]
+                )
             }
         }
         stage('Push') {
