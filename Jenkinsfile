@@ -12,16 +12,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {  
-                echo JsonOutput.toJson([
-                    a: 'test'
-                ])
-                
                 writeFile(
                     file: 'build.txt',
                     text: JsonOutput.toJson([
                         branch: env.GIT_BRANCH,
                         commit: env.GIT_COMMIT,
                         time: new Date().format("yyyy-MM-dd HH:mm"),
+                        yes: "yes!",
                     ]),
                     encoding: 'UTF-8'
                 )
