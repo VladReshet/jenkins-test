@@ -11,13 +11,13 @@ pipeline {
 
     stages {
         stage('Build') {
-            steps {
-                def currentTime = new Date().format("yyyy-MM-dd HH:mm")
+            def currentTime = new Date().format("yyyy-MM-dd HH:mm")
 
-                echo JsonOutput.toJson([
-                    a: 'test'
-                ])
-                
+            echo JsonOutput.toJson([
+                a: 'test'
+            ])
+            
+            steps {  
                 writeFile(
                     file: 'build.txt',
                     text: "${env.GIT_BRANCH}/${env.GIT_COMMIT}/${currentTime}\n",
